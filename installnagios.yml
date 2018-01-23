@@ -1,0 +1,76 @@
+---
+- hosts: node
+  remote_user: centos
+  become_method : sudo
+  become: yes
+  gather_facts: yes
+
+  tasks:
+#    - name: Install required delta rpm
+#      yum: name=http://mirror.centos.org/centos/7/os/x86_64/Packages/deltarpm-3.6-3.el7.x86_64.rpm state=present
+#      become: yes
+
+#    - name: Install delta rpm
+#      yum: name=deltarpm state=present
+#      become: yes
+
+#    - name: Install epel rpm
+#      yum: name=http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm state=present
+#      become: yes
+#
+#    - name: Install epel Dependencies
+#      shell: wget http://dl.fedoraproject.org/pub/epel/6/i386/  #state=present
+#      become: yes
+#
+#    - name: Install rpm epel
+#      yum: name=http://rpms.famillecollet.com/enterprise/remi-release-7.rpm state=present
+#      become: yes
+
+#    - name: Install epel-release rpm
+#      yum: name=epel-release*rpm state=present
+#      become: yes    
+
+#    - name: Install epel-release rpm
+#      service: name=--enablerepo=epel-testing state=started
+#      become: yes
+
+#    - name: Install Nagios
+#      yum: name=nagios state=present
+#      become: yes
+
+#    - name: Install Nagios Plugins
+#      yum: name=nagios-plugins-all state=present
+#      become: yes
+    
+#    - name: Install Nrpe for Nagios
+#      yum: name=nagios-plugins-nrpe state=present
+#      become: yes
+
+#    - name: Install Nrpe
+#      yum: name=nrpe state=present
+#      become: yes
+
+    - name: Install httpd
+      yum: name=httpd state=present
+      become: yes
+
+    - name: Install php
+      yum: name=php state=present
+      become: yes
+
+    - name: httpd service on
+      service: name=chkconfig-httpd-on state=started enabled=yes
+      become: yes
+
+    - name: Nagios service on
+      service: name=chkconfig-nagios-on state=started enabled=yes
+      become: yes
+
+    - name: httpd service start
+      service: name=httpd state=started enabled=yes
+      become: yes
+
+    - name: Nagios service start
+      service: name=nagios state=started enabled=yes
+      become: yes 
+
